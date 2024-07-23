@@ -1,10 +1,20 @@
 {% extends 'Base.html.twig' %}
+{% block title %}ListCategories{% endblock %}
 {% block type %}
     <main>
+
+        <h2>Les Différentes versions</h2>
+        <section class="categorie">
     {% for categorie in categories %}
 
-            <section class="categorie"><p>{{categorie}}</p></section>
+            <article class="case">
+
+                <p class="cartouche">{{categorie}}</p>
+            </article>
+
+
 
     {% endfor %}
+        </section>
     </main>
 {% endblock %}

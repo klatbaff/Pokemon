@@ -81,7 +81,7 @@ class ArticleController extends AbstractController{
         ];
 
 
-        return $this->render('ListArticles.html.twig', [
+        return $this->render('ListPokemon.html.twig', [
             'pokemons' => $pokemons]);
     }
 

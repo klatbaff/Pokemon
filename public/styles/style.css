@@ -1,30 +1,56 @@
 
 @font-face {
-    font-family: "Montserrat";
-    src: url(../fonts/Montserrat/static/Montserrat-Light.ttf);
+    font-family: 'pokemon';
+    src: url( ../font/Pokemon_Hollow.ttf);
 }
 
 
 * {
     margin: 0;
     padding: 0;
-    font-family: "Montserrat", sans-serif;
 }
 
 /* Général */
-img {
+header,main,footer {
     width: 100%;
+    font-family: 'pokemon';
+    color: white;
 }
+h1{
+    text-align: center;
+    font-size: 45px;
+    margin-bottom: 50px;
+}
+.video{
+    text-align: center;
+    margin: auto;
+}
+iframe{
+    width: 150vh;
+    height: 80vh;
+}
+
 
 
 h2 {
     text-align: center;
     padding: 25px;
     text-transform: uppercase;
+    border: solid;
+    font-size: 35px;
+
 }
 
 h3 {
     text-align: center;
+    font-size: 30px;
+
+
+}
+p{
+    font-size: 25px;
+    text-align: center;
+
 }
 
 
@@ -33,18 +59,12 @@ h3 {
 header {
     /* background-color: rgb(145, 154, 208); */
     background-color: rgb(232, 204, 121);
-    color: rgb(37, 54, 153);
     text-align: center;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-}
-
-.logo {
-    width: 6%;
-    padding: 1%;
 }
 
 /* LIST - UL - LI */
@@ -64,12 +84,50 @@ li {
 
 a {
     text-decoration: none;
-    color: rgb(37, 54, 153);
     font-size: 15px;
+
 }
 
-.categorie{
-    
+main{
+    background-image: url("../img/watch-pokemon-tv-169.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 120%;
+}
+
+section{
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.pokemon{
+    border:solid;
+    border-color:black;
+    border-radius: 20px;
+    width: 15%;
+    background: darkblue;
+    margin-top: 50px;
+
+
+
+
+}
+.pokedex{
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.pokemon2{
+    text-align: center;
+    background-color: darkblue;
+
+}
+.cartouche{
+    text-align: center;
+    background-color: darkblue;
 }
 
 /* FOOTER */
@@ -87,7 +145,5 @@ footer {
 }
 
 .logoFooter {
-    width: 3%;
-    padding: 1%;
-    color: rgba(43, 178, 212, 0.684);
+
 }

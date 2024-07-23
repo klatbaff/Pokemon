@@ -1,13 +1,25 @@
 <head>
-<link rel="stylesheet" href="../public/styles/style.css" />
+    <!doctype html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+    </body>
+    </html>
+<link rel="stylesheet" href="{{ asset('styles/style.css')}}"/>
 </head>
 <header>
 
     <nav>
         <ul>
-            <li><a href=>pokédex</a></li>
-            <li><a href=>les personnages</a></li>
-            <li><a href=>les éléments</a></li>
+            <li><a href="{{ path('home') }}">Accueil</a></li>
+            <li><a href="{{ path('listArticles') }}">Pokédex</a></li>
+            <li><a href="{{ path('listCategories') }}">les éléments</a></li>
             <li><a href=>les ennemis</a></li>
             <li><a href=>le Monde de pokémon</a></li>
             <li>Blog</li>
