@@ -15,7 +15,7 @@ class IndexController extends AbstractController{
     // Permet de créer une route c'est a dire une nouvelle page sur notre appli
     //Quand l'url est appelée cela exécute automatiquement la méthode définie sous la route
 #[Route('/', name:'home')]
-    public function index(){lorem.html.twigie;
+    public function index(){;
 
     return $this->render('lorem.html.twig', [
 

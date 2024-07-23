@@ -1,0 +1,10 @@
+{% extends 'Base.html.twig' %}
+{% block type %}
+    <main>
+    {% for categorie in categories %}
+
+            <section class="categorie"><p>{{categorie}}</p></section>
+
+    {% endfor %}
+    </main>
+{% endblock %}
