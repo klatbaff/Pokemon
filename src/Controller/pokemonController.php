@@ -12,8 +12,10 @@ use Symfony\Component\Routing\Attribute\Route;
 class ArticleController extends AbstractController{
 
     #[Route('/articles', name:'listArticles')]
-    public function Article()
+    public function showPokemon()
     {
+        $request = Request::createFromGlobals();
+        $idPokemon= request->query->get($idPokemon)
 
 
         $pokemons = [
@@ -79,6 +81,11 @@ class ArticleController extends AbstractController{
             ]
 
         ];
+
+        $pokemonFound=null
+    foreach($pokemons as $pokemon){
+        if($pokemon['id']==(int)$idPokemon){}
+    }
 
 
         return $this->render('ListPokemon.html.twig', [
