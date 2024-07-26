@@ -8,6 +8,7 @@
                 <p>{{ pokemon.description }}</p>
                 <div class="PokeBdd">
                 <img src="{{pokemon.image}}">
+                    <a href= "{{ path('deletePokemon',{id:pokemon.id}) }}"> Supprimer le Pokémon</a>
             </div>
             </article>
 

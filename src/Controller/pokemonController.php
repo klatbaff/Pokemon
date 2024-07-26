@@ -2,18 +2,23 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use App\Entity\Pokemon;
 use App\Repository\PokemonRepository;
-use PHPUnit\Framework\Constraint\TraversableContainsOnly;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 
-class pokemonController extends AbstractController{
+
+class pokemonController extends AbstractController
+{
 
     private array $pokemons;
+
     public function __construct()
     {
 
@@ -90,9 +95,12 @@ class pokemonController extends AbstractController{
             ]
 
 
-       ];}
-        #[Route('/Listpokemon', name: 'ListPokemon')]
-        public function ListPokemon(){
+        ];
+    }
+
+    #[Route('/Listpokemon', name: 'ListPokemon')]
+    public function ListPokemon()
+    {
 
         return $this->render('ListPokemon.html.twig', [
             'pokemons' => $this->pokemons
@@ -100,12 +108,12 @@ class pokemonController extends AbstractController{
 
     }
 
-    #[Route('/Show/{idPokemon}', name:'ShowPokemon')]
+    #[Route('/Show/{idPokemon}', name: 'ShowPokemon')]
     // Injection de dépendance (ou "autowire"): on demande a symfony
-    // de créer une instance de la classe Resquest dans la variable $request
-    //public function showPokemon(Request $request)
+        // de créer une instance de la classe Resquest dans la variable $request
+        //public function showPokemon(Request $request)
 
-    public function showPokemon($idPokemon):Response
+    public function showPokemon($idPokemon): Response
 
     {
         //$request = new request($_GET,$_POST);
@@ -114,16 +122,16 @@ class pokemonController extends AbstractController{
         //$idPokemon= $request->query->get('id');
 
         $pokemonfound = null;
-    foreach ($this->pokemons as $pokemon){
-        if($pokemon['id']===(int)$idPokemon) {
-            $pokemonfound = $pokemon;
+        foreach ($this->pokemons as $pokemon) {
+            if ($pokemon['id'] === (int)$idPokemon) {
+                $pokemonfound = $pokemon;
+            }
         }
-    }
-            return $this->render('ShowPokemon.html.twig',[
-        'pokemon'=> $pokemonfound ]);
+        return $this->render('ShowPokemon.html.twig', [
+            'pokemon' => $pokemonfound]);
     }
 
-    #[Route('/ListCategories', name:'ListCategories')]
+    #[Route('/ListCategories', name: 'ListCategories')]
     public function Categories()
     {
 
@@ -136,30 +144,32 @@ class pokemonController extends AbstractController{
 
     }
 
-    #[Route('/PokemonBdd', name:'PokemonBdd')]
-    public function ShowPokemonBdd( PokemonRepository $PokemonRepository) {
+    #[Route('/PokemonBdd', name: 'PokemonBdd')]
+    public function ShowPokemonBdd(PokemonRepository $PokemonRepository)
+    {
 
-        $pokemons = $PokemonRepository -> findAll();
+        $pokemons = $PokemonRepository->findAll();
 
-        return $this->render('PokemonFromBdd.html.twig',[
-            'pokemons'=>$pokemons]);
+        return $this->render('PokemonFromBdd.html.twig', [
+            'pokemons' => $pokemons]);
     }
-    #[Route('/PokemonById/{id}', name:'PokemonById')]
+
+    #[Route('/PokemonById/{id}', name: 'PokemonById')]
     public function ShowPokemonById(int $id, PokemonRepository $PokemonById): Response
-{
+    {
 
-        $pokemon = $PokemonById -> find($id);
+        $pokemon = $PokemonById->find($id);
 
-        return $this->render('ShowPokemonById.html.twig',[
-            'pokemon'=>$pokemon
+        return $this->render('ShowPokemonById.html.twig', [
+            'pokemon' => $pokemon
         ]);
     }
-    #[Route('/searchPokemon', name:'PokemonSearch')]
 
-        public function searchPokemon(Request $request, PokemonRepository $pokemonRepository): Response
+    #[Route('/searchPokemon', name: 'PokemonSearch')]
+    public function searchPokemon(Request $request, PokemonRepository $pokemonRepository): Response
     {
         //définit un tableau vide par défaut
-        $pokemonsFound=[];
+        $pokemonsFound = [];
 
         // si dans la requete il y a un nom de rentré
         if ($request->request->has('name')) {
@@ -167,24 +177,72 @@ class pokemonController extends AbstractController{
             $nameSearched = $request->request->get('name');
             $pokemonsFound = $pokemonRepository->findLikeName($nameSearched);
 
-        //$pokemonFound= null;
-        //if($request->request->has('name')){
-        //$searchName = $request->request->get('name');
-        //$pokemonFound = $pokemonRepository->findOneBy(['name'=>$searchName]);
+            //$pokemonFound= null;
+            //if($request->request->has('name')){
+            //$searchName = $request->request->get('name');
+            //$pokemonFound = $pokemonRepository->findOneBy(['name'=>$searchName]);
 
 // si le pokemon n'existe pas renvoie a une page d'erreur
-        if(count($pokemonsFound)===0) {
-            $html = $this->renderView('404.html.twig');
-            return new Response($html, status: 404);
+            if (count($pokemonsFound) === 0) {
+                $html = $this->renderView('404.html.twig');
+                return new Response($html, status: 404);
             }
         }
 
         // sinon renvoie les infos du pokemon
         return $this->render('SearchPokemon.html.twig', [
-        'pokemons' => $pokemonsFound
-    ]);
+            'pokemons' => $pokemonsFound
+        ]);
+    }
+
+    #[Route('/pokemons/delete/{id}', name: 'deletePokemon')]
+    // je viens inserer un id dans les parametres pour rappeler l'id de la route
+    public function deletePokemon(int $id, EntityManagerInterface $EntityManager, Pokemonrepository $pokemonrepository): Response
+    {
+        // methode find pour recuperer un id
+        // repository pour toute les requetes
+        // entity pour toute les requetes de modifications
+        $pokemon = $pokemonrepository->find($id);
+
+        // j'utilise la classe entity manager pour préparer la requête SQL de suppression
+        // cette requête n'est pas executée tout de suite
+
+        if (!$pokemon) {
+            $html = $this->renderView('404.html.twig');
+            return new Response($html, status: 404);
+        }
+        $EntityManager->remove($pokemon);
+        // j'exécute les requetes SQL présentes
+        $EntityManager->flush($pokemon);
+
+        return $this->redirectToRoute('PokemonBdd');
+    }
+
+    #[Route('/pokemons/insert/withoutForm', name: 'InsertPokemon')]
+    public function InsertPokemon(EntityManagerInterface $entityManager)
+    {
+
+        // j'instancie la classe de l'entité Pokemon
+        // je remplis toutes ces propriétés (soit avec le constructor, qu'il faut créé, soit avec les setters)
+        $pokemon = new Pokemon(
+            name: 'Roucool',
+            description: "Il est souvent vu dans les forêts. Il brasse l'air de ses ailes près du sol pour projeter du sable.",
+            image: 'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/016.png',
+            type: 'Normal/Vol',);
+
+        // est équivalent a:
+
+        //$pokemon=new pokemon()
+        //$pokemon->setname('Roucool')
+        //$pokemon->setdescription("Il est souvent vu dans les forêts. Il brasse l'air de ses ailes près du sol pour projeter du sable.")
+        //$pokemon->setimage('https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/016.png')
+        //$pokemon->settype('Normal/Vol')
+
+
+        $entityManager->persist($pokemon);
+        // j'exécute les requetes SQL présentes
+        $entityManager->flush($pokemon);
+
+        return $this->redirectToRoute('PokemonBdd');
     }
 }
-
-
-

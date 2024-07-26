@@ -25,6 +25,18 @@ class Pokemon
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
+    /**
+     * @param int|null $id
+     */
+    public function __construct($name, $description, $image, $type)
+    {
+        $this->name = $name;
+        $this->description = $description;
+        $this->image = $image;
+        $this->type = $type;
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
