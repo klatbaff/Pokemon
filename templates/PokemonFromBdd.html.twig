@@ -1,0 +1,17 @@
+{% extends 'Base.html.twig' %}
+{% block title %}Show{% endblock %}
+{% block content %}
+    <main>
+        {% for pokemon in pokemons %}
+            <article class="Bddpoke">
+                <a href= "{{ path('PokemonById',{id:pokemon.id})}}"  class="lien">{{pokemon.name}}</a>
+                <p>{{ pokemon.description }}</p>
+                <div class="PokeBdd">
+                <img src="{{pokemon.image}}">
+            </div>
+            </article>
+
+        {% endfor %}
+    </main>
+{% endblock %}
+

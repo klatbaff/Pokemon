@@ -18,15 +18,14 @@
     <nav>
         <ul>
             <li><a href="{{ path('home') }}">Accueil</a></li>
-            <li><a href="{{ path('listArticles') }}">Pokédex</a></li>
-            <li><a href="{{ path('listCategories') }}">les éléments</a></li>
-            <li><a href=>les ennemis</a></li>
-            <li><a href=>le Monde de pokémon</a></li>
-            <li>Blog</li>
+            <li><a href="{{ path('ListPokemon') }}">Pokédex</a></li>
+            <li><a href="{{ path('ListCategories') }}">les éléments</a></li>
+            <li><a href="{{ path('Roulette') }}">la Roulette</a></li>
+            <li><a href={{ path('PokemonSearch') }}>Cherchez votre Pokemon</a></li>
         </ul>
     </nav>
 
-    <p>this is the Start</p>
+    <div class="logo"><img src="../public/img/58341.png" alt=""></div>
 
 </header>
 {% block content %}
@@ -34,7 +33,7 @@
 {% block type%}
 {% endblock %}
 <footer>
-    <p>this is the end</p>
+    <div class="logo"><img src="../public/img/58341.png" alt=""></div>
 
 
 

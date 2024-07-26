@@ -9,8 +9,9 @@
     {% if pokemon.isPublished %}
 <article class="pokemon">
     <p>{{pokemon.id}}</p>
-    <p>{{pokemon.title}}</p>
+    <a class='namePoKe' href="{{ path('ShowPokemon',{idPokemon:pokemon.id}) }}">{{pokemon.title}}</a>
     <p>{{pokemon.content}}</p>
+    <div class="pokeke"><img src='{{ asset('img/'~pokemon.img)}}' alt=""></div>
 </article>
     {% endif %}
 {% endfor %}

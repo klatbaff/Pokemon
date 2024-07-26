@@ -1,0 +1,16 @@
+
+{% extends 'Base.html.twig' %}
+{% block title %}Show{% endblock %}
+{% block content %}
+    <main>
+    {% if pokemon %}
+        <h2>Et voici :</h2>
+        <h3>{{pokemon.title}}</h3>
+        <p>{{ pokemon.content }}</p>
+        <div class="pokekeke">
+            <img src="{{asset('img/'~pokemon.img)}}">
+        </div>
+        {% endif %}
+    </main>
+{% endblock %}
+

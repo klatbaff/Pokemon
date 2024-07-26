@@ -1,0 +1,22 @@
+
+{% extends 'Base.html.twig' %}
+{% block title %}ListeProducts{% endblock %}
+{% block content %}
+
+    <main>
+        <section class="pokedex">
+            {% for Products in Products %}
+                    <article class="pokemon">
+                        <p>{{Products.id}}</p>
+                        <a class='namePoKe' href="{{ path('ShowProducts',{idProducts :Products.id}) }}">{{Products.title}}</a>
+                        <p>{{Products.price}}</p>
+                        <p>{{Products.price_reduction}}</p>
+                        {% for categories in Products.categories %}
+                        <p>{{categories}}</p>
+                        {% endfor %}
+                        <div class="pokeke"><img src='{{ asset('img/'~Products.image)}}' alt=""></div>
+                    </article>
+            {% endfor %}
+        </section>
+    </main>
+{% endblock %}

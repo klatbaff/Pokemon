@@ -1,0 +1,26 @@
+
+{% extends 'Base.html.twig' %}
+{% block title %}ListePokemon{% endblock %}
+{% block content %}
+
+<main>
+    <section>
+        {% for pokemon in pokemons %}
+        <article>
+        <h3>{{pokemon.name}}</h3>
+            <p>{{ pokemon.description }}</p>
+            <div class="pokekeke">
+                <img src="{{pokemon.image}}">
+            </div>
+        </article>
+        {% endfor %}
+<form  method="post">
+    <label>Chercher un pokémon</label>
+    <input name="name" id="pokemon" type="text"/></p>
+    <button type="submit">Valider</button>
+
+</form>
+        </section>
+
+</main>
+{% endblock %}

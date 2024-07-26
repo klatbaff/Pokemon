@@ -4,6 +4,12 @@
     src: url( ../font/Pokemon_Hollow.ttf);
 }
 
+@font-face {
+    font-family: 'pokemon2';
+    src: url( ../font/Pokemon_Solid.ttf);
+}
+
+
 
 * {
     margin: 0;
@@ -58,7 +64,7 @@ p{
 /* HEADER */
 header {
     /* background-color: rgb(145, 154, 208); */
-    background-color: rgb(232, 204, 121);
+    background-color: rgb(255, 205, 2);
     text-align: center;
 
     display: flex;
@@ -84,7 +90,10 @@ li {
 
 a {
     text-decoration: none;
+    list-style: none;
     font-size: 15px;
+    font-family: 'pokemon2';
+    color: black;
 
 }
 
@@ -94,6 +103,7 @@ main{
     background-size: cover;
     background-position: center;
     height: 120%;
+    overflow-inline: scroll;
 }
 
 section{
@@ -109,9 +119,19 @@ section{
     width: 15%;
     background: darkblue;
     margin-top: 50px;
+    text-align: center;
 
+}
+.pokeke{
+    width: 50%;
+    display: flex;
+    margin: auto;
+}
 
-
+.pokekeke{
+    width:30%;
+    margin: auto;
+    background: white;
 
 }
 .pokedex{
@@ -125,9 +145,28 @@ section{
     background-color: darkblue;
 
 }
+.logo{
+    width:25%;
+}
 .cartouche{
     text-align: center;
     background-color: darkblue;
+}
+.Roulette{
+    width:45%;
+    margin: auto;
+    transition: 0.8s;
+}
+.Roulette:hover{
+    rotate: 4000deg;
+    animation: Roulette 2s linear infinite;
+}
+
+
+
+img{
+    width: 100%;
+
 }
 
 /* FOOTER */
@@ -137,13 +176,36 @@ footer {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: rgb(232, 204, 121);
+    background-color: rgb(255, 205, 2);
     color: white;
 
     /* position: fixed;
     bottom: 0; */
 }
 
-.logoFooter {
+.namePoke {
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+}
+.Bddpoke{
+    color:rgb(255, 205, 2);  ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: darkblue;
+
+
+
 
 }
+.PokeBdd{
+    width: 10%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+

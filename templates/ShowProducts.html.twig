@@ -1,0 +1,20 @@
+
+{% extends 'Base.html.twig' %}
+{% block title %}Show{% endblock %}
+{% block content %}
+    <main>
+        {% if Product %}
+            <h2>Et voici :</h2>
+            <h3>{{Products.title}}</h3>
+            <p>{{Products.content }}</p>
+            <p>{{Products.price}}</p>
+            <p>{{Products.price_reduction}}</p>
+            {% for categories in Products.categories %}
+            <p>{{categories}}</p>
+            {% endfor %}
+            <div class="pokekeke">
+                <img src="{{asset('img/'~Products.image)}}">
+            </div>
+        {% endif %}
+    </main>
+{% endblock %}
