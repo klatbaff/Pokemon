@@ -28,13 +28,13 @@ class Pokemon
     /**
      * @param int|null $id
      */
-    public function __construct($name, $description, $image, $type)
-    {
-        $this->name = $name;
-        $this->description = $description;
-        $this->image = $image;
-        $this->type = $type;
-    }
+    //public function __construct($name, $description, $image, $type)
+    //{
+    //    $this->name = $name;
+    //    $this->description = $description;
+    //    $this->image = $image;
+    //    $this->type = $type;
+    //}
 
 
     public function getId(): ?int
@@ -49,6 +49,13 @@ class Pokemon
 
     public function setName(string $name): static
     {
+
+        // pour gérer les contraintres de propriétées
+        // par exemeple si un titre dois faire plus de x caractères
+        // on peut soulever une exception
+        //pour gérer l'erreur correctement
+        // if (str($name)<3){
+        // throw new / Exception $errorMessage
         $this->name = $name;
 
         return $this;

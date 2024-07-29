@@ -109,7 +109,7 @@ class pokemonController extends AbstractController
     }
 
     #[Route('/Show/{idPokemon}', name: 'ShowPokemon')]
-    // Injection de dépendance (ou "autowire"): on demande a symfony
+        // Injection de dépendance (ou "autowire"): on demande a symfony
         // de créer une instance de la classe Resquest dans la variable $request
         //public function showPokemon(Request $request)
 
@@ -218,31 +218,57 @@ class pokemonController extends AbstractController
         return $this->redirectToRoute('PokemonBdd');
     }
 
-    #[Route('/pokemons/insert/withoutForm', name: 'InsertPokemon')]
-    public function InsertPokemon(EntityManagerInterface $entityManager)
+    #[Route('/Pokemon/Insert/WithoutForm', name: 'InsertPokemon')]
+    public function InsertPokemon( Request $request,EntityManagerInterface $entityManager)
     {
 
         // j'instancie la classe de l'entité Pokemon
         // je remplis toutes ces propriétés (soit avec le constructor, qu'il faut créé, soit avec les setters)
-        $pokemon = new Pokemon(
-            name: 'Roucool',
-            description: "Il est souvent vu dans les forêts. Il brasse l'air de ses ailes près du sol pour projeter du sable.",
-            image: 'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/016.png',
-            type: 'Normal/Vol',);
+
+        //try{
+        // les try catch permettent d'executer du code
+        // tout en récuperant les erreurs potentiels afin de les gérer correctement (affichage de page spécifique)
+
+    //    $pokemon = new Pokemon(
+    //      name: 'Roucool',
+    //      description: "Il est souvent vu dans les forêts. Il brasse l'air de ses ailes près du sol pour projeter du sable.",
+    //      image: 'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/016.png',
+    //      type: 'Normal/Vol',);
+    //      }catch {($errorMessage){
+    //      return $this render(view:'page/500.html.twig', [
+    //      'errorrMessage' => $errorMessage]);
+    //}     permet de voir si l'on a une erreur dans le code envoyé en try et de la corriger
 
         // est équivalent a:
+        //préférable si l'on utilise un framework
 
-        //$pokemon=new pokemon()
-        //$pokemon->setname('Roucool')
-        //$pokemon->setdescription("Il est souvent vu dans les forêts. Il brasse l'air de ses ailes près du sol pour projeter du sable.")
-        //$pokemon->setimage('https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/016.png')
-        //$pokemon->settype('Normal/Vol')
+        $pokemon = null;
+        if($request->getMethod()==='POST') {
+
+            $name = $request->request->get(key: 'name');
+            $description = $request->request->get(key: 'description');
+            $image = $request->request->get(key: 'image');
+            $type = $request->request->get(key: 'type');
+
+            $pokemon=new pokemon;
+            $pokemon->setname($name);
+            $pokemon->setdescription($description);
+            $pokemon->setimage($image);
+            $pokemon->settype($type);
 
 
-        $entityManager->persist($pokemon);
-        // j'exécute les requetes SQL présentes
-        $entityManager->flush($pokemon);
+            //$pokemon=new pokemon()
+            //$pokemon->setname('Roucool')
+            //$pokemon->setdescription("Il est souvent vu dans les forêts. Il brasse l'air de ses ailes près du sol pour projeter du sable.")
+            //$pokemon->setimage('https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/016.png')
+            //$pokemon->settype('Normal/Vol')
 
-        return $this->redirectToRoute('PokemonBdd');
+
+            $entityManager->persist($pokemon);
+            // j'exécute les requetes SQL présentes
+            $entityManager->flush($pokemon);
+        }
+
+        return $this->render('PokemonInsertWithoutForm.html.twig');
     }
 }

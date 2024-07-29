@@ -1,0 +1,24 @@
+
+{% extends 'Base.html.twig' %}
+{% block title %}ListePokemon{% endblock %}
+{% block content %}
+
+    <main>
+    <div class="addBDD">
+            <form  method="post">
+                <label>nom</label>
+                <input name="name" id="pokemon" type="text"/></p>
+                <label>description</label>
+                <input name="description" id="description" type="text"/></p>
+                <label>image</label>
+                <input name="image" id="image" type="text"/></p>
+                <label>type</label>
+                <input name="type" id="type" type="text"/></p>
+
+                <button type="submit">Valider</button>
+            </form>
+        </div>
+        </section>
+
+    </main>
+{% endblock %}
